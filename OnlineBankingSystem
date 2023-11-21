@@ -1,0 +1,131 @@
+//package Copyconstructor;
+import java.util.Scanner;
+class Bank
+{
+	private String bankName;
+	private String customerName;
+	private String Address;
+	private String bankIFSCCode;
+	private int accountNumber;
+	private int currentBalance;
+	
+	public Bank(String bankName, String customerName, String address, String bankIFSCCode, int accountNumber,
+			int currentBalance) 
+	{
+		super();
+		this.bankName = bankName;
+		this.customerName = customerName;
+		Address = address;
+		this.bankIFSCCode = bankIFSCCode;
+		this.accountNumber = accountNumber;
+		this.currentBalance = currentBalance;
+	}
+	public void setDetails(String bankName, String customerName, String address, String bankIFSCCode, int accountNumber,
+			int currentBalance) 
+	{
+		this.bankName = bankName;
+		this.customerName = customerName;
+		this.Address = address;
+		this.bankIFSCCode = bankIFSCCode;
+		this.accountNumber = accountNumber;
+		this.currentBalance = currentBalance;
+	}
+	public void withdraw(double amount) 
+	{
+		if(currentBalance<=1000) {
+			System.out.println("...Insufficient Balance...");
+		}
+		else {
+			currentBalance= (int) (currentBalance-amount);
+			if(currentBalance<1000) {
+				System.out.println("...Maintain Minimum Balance...");
+			}
+			else if(currentBalance>=1000) {
+				System.out.println("Available Balance :"+currentBalance);
+			}
+		}
+	}
+	
+	public void deposit(double amount) 
+	{
+		if(currentBalance<1000) {
+			System.out.println("maintain  minimum balance");
+		}
+		else {
+			System.out.println("Available balance :"+(currentBalance+amount));
+		}
+	}
+	public void CurrentBalance()
+	{
+		System.out.println("Current Balance :"+currentBalance);
+	}
+	
+	public String displayDetails() 
+	{
+		return toString();
+	}
+	@Override
+	public String toString() 
+	{
+		return "OnlineBanking [bankName=" + bankName + ", customerName=" + customerName + ", Address=" + Address
+				+ ", bankIFSCCode=" + bankIFSCCode + ", accountNumber=" + accountNumber + ", currentBalance="
+				+ currentBalance + "]";
+	}
+}
+public class onlineBanking 	
+{
+	public static void main(String[] args)
+	{
+		Bank bn=new Bank(null, null, null, null, 0, 0);
+		Scanner sc= new Scanner(System.in);
+		System.out.print("Enter bankName:");
+		String bN=sc.nextLine();
+		
+		System.out.print("Enter CustomerName:");
+		String cN=sc.nextLine();
+		
+		System.out.print("Enter Address:");
+		String Adrs=sc.nextLine();
+		
+		System.out.print("Enter IFSC CODE:");
+		String IFSC=sc.nextLine();
+		
+		System.out.print("Enter Accountnumber:");
+		int aNumber=sc.nextInt();
+		
+		System.out.print("Enter currentBalance:");
+		int cb=sc.nextInt();
+		
+		bn.setDetails(bN,cN,Adrs,IFSC,aNumber,cb);
+		
+		System.out.print("Enter 1 for balance enquiry\r\n"
+				+ "\r\n"
+				+ "Enter 2 for withdraw amount\r\n"
+				+ "\r\n"
+				+ "Enter 3 for deposit\r\n"
+				+ "\r\n"
+				+ "Enter 4 for display customer details : ");
+		int num=sc.nextInt();
+;
+		switch(num) 
+		{
+		case 1:bn.CurrentBalance();
+		break;
+		case 2:System.out.print("please enter withdraw amount :");
+		     int amt=sc.nextInt();
+			bn.withdraw(amt);
+			break;
+		case 3:
+			System.out.print(" please enter deposit amount :");
+			int dmt=sc.nextInt();
+			bn.deposit(dmt);
+		break;
+		case 4:System .out.print(bn.displayDetails());
+		break;
+		default:System.out.print("plz enter valid number..");
+		sc.close();
+		}
+	}
+
+}
+
